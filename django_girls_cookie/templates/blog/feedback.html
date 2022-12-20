@@ -1,0 +1,18 @@
+
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+    <h2>Feedback </h2>
+
+<form action='' method = "post" novalidate class='post-form'>
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="save btn btn-secondary">Save</button>
+
+</form>
+
+{% endblock content %}  
+    
