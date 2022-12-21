@@ -10,19 +10,19 @@ urlpatterns = [
     
     
     
-    path('',views.index, name='index'),
-    path('post/<int:pk>/',views.detail,name='detail'),
-    path('form/',views.new_post,name='new-form'),
+    path('',views.Index.as_view(), name='index'),
+    path('post/<int:pk>/',views.PostDetailView.as_view(),name='detail'),
+    path('form/',views.Newpost.as_view(),name='new-form'),
 
     #ajax url for update
-    path('update',views.updatePost, name='update'),
+    path('update',views.Updatepost.as_view(), name='update'),
     
     #feedback against a post
-    path('post/<int:pk>/feedback',views.feedback_against_post, name='feedback_post'),
+    path('post/<int:pk>/feedback',views.Feedback.as_view(), name='feedback_post'),
     #Feedback Success
     path('success/',views.Success.as_view(),name='success'),
     #Delete View
-    path('delete',views.deletePost,name='delete'),
+    path('delete',views.Deletepost.as_view(),name='delete'),
     
     
 ]
