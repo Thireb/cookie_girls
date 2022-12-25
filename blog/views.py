@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.urls import reverse
 from django.utils import timezone
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, ListView, DeleteView, CreateView
 from django.views.generic.edit import FormView
 from django.views import View
 from .forms import FeedbackPostForm, PostForm
@@ -15,13 +15,14 @@ from django.http import HttpResponse
 
 
 # url route = index
-class Index(TemplateView):
+class Index(ListView):
     template_name = "blog/index.html"
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["posts"] = Post.objects.filter(published_at__lte=datetime.now()).order_by('-published_at')
-        return context
+    context_object_name = 'posts'
+    queryset = Post.objects.order_by('-published_at')
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["posts"] = Post.objects.filter(published_at__lte=datetime.now()).order_by('-published_at')
+    #     return context
     
     
 
@@ -50,10 +51,19 @@ class PostDetailView(DetailView):
 #     return render(request,'blog/new_form.html',{'form':form})
 
 
-class Newpost(FormView):
+class Newpost(CreateView):
     template_name = 'blog/new_form.html'
     form_class = PostForm
-    
+    model = Post
+    #success_url = reverse_lazy('detail')
+    # def post(self, request):
+    #     form = PostForm(request.POST)
+    #     if form.is_valid():
+    #         post = form.save(commit = False)
+    #         post.name = self.request.user
+    #         post.published_at = timezone.now()
+    #         post.save()
+    #         return redirect('detail',pk=post.pk)
     def form_valid(self, form):
         post = form.save(commit=False)
         post.name = self.request.user
