@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.urls import reverse
 from django.utils import timezone
-from django.views.generic import TemplateView, DetailView, ListView, DeleteView, CreateView
+from django.views.generic import TemplateView, DetailView, ListView, DeleteView, CreateView, UpdateView
 from django.views.generic.edit import FormView
 from django.views import View
 from .forms import FeedbackPostForm, PostForm
@@ -15,7 +15,8 @@ from django.http import HttpResponse
 
 
 # url route = index
-class Index(ListView):
+#Home of the site, displays all posts in latest at top order.
+class PostListView(ListView):
     template_name = "blog/index.html"
     context_object_name = 'posts'
     queryset = Post.objects.order_by('-published_at')
@@ -26,10 +27,12 @@ class Index(ListView):
     
     
 
-
-class Success(TemplateView):
+#Success template, used after feedback submitted form.
+class SuccessView(TemplateView):
     template_name = "blog/success.html"
 
+
+#Post Detail View, to display each post in detail, comes after PostListView
 class PostDetailView(DetailView):
     model = Post
     template_name = "blog/detail.html"
@@ -51,7 +54,8 @@ class PostDetailView(DetailView):
 #     return render(request,'blog/new_form.html',{'form':form})
 
 
-class Newpost(CreateView):
+#New Post, to save a new post with taking current Admin user i.e. Ahmad
+class NewPostCreateView(CreateView):
     template_name = 'blog/new_form.html'
     form_class = PostForm
     model = Post
@@ -92,8 +96,21 @@ class Newpost(CreateView):
 #         return JsonResponse({'Updated':False}, status = 400)
         
         
-class Updatepost(View):
+        
+        
+# class UpdatePost(UpdateView):
+#     #error: quote_from_bytes() expected bytes
+#     model = Post
+#     context_object_name ='post'
+#     fields = ['title','text',]
+#     def get_success_url(self):
+#         return JsonResponse({'Updated':True}, status = 200)
+
+#To update a saved post, data is sent using Ajax
+class UpdatePostView(UpdateView):
+    model = Post
     def post(self, request):
+        
         try:
             post_id = request.POST.get('post_to_update')
             title = request.POST.get('title')
@@ -107,8 +124,7 @@ class Updatepost(View):
         post.publish()
         post.save()
         return JsonResponse({'Updated':True}, status = 200)
-    def get(self, request):
-        return JsonResponse({'Updated':False}, status = 400)
+
 
 #New feedback post form
 # def feedback_against_post(request, pk):
@@ -125,8 +141,8 @@ class Updatepost(View):
 #         feedPostForm = FeedbackPostForm()
 #     return render(request,'blog/feedback.html',{'form':feedPostForm})
 
-class Feedback(FormView):
-    model = Post
+#Feedback against a post, accessible on detail page
+class FeedbackOfPostView(CreateView):
     form_class = FeedbackPostForm
     template_name = 'blog/feedback.html'
     #success_url = reverse_lazy('success')
@@ -150,11 +166,13 @@ class Feedback(FormView):
 #     except:
 #         return JsonResponse({"Deleted":False}, status=400)
     
-class Deletepost(View):
-    def post(self,request):
-        post = get_object_or_404(Post, pk = request.POST.get("post_to_delete"))
-        post.delete()
-        return JsonResponse({'Deleted':True}, status = 200)
+class Deletepost(DeleteView):
+    # def post(self,request):
+    #     post = get_object_or_404(Post, pk = request.POST.get("post_to_delete"))
+    #     post.delete()
+    #     return JsonResponse({'Deleted':True}, status = 200)
+    #For future use, currently only GET request is being used for post deletion
+    
     def get(self,request):
         post = get_object_or_404(Post, pk = request.GET.get("post_to_delete"))
         post.delete()

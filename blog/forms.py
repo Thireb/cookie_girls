@@ -23,5 +23,5 @@ class FeedbackPostForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if not email.endswith('softcatalyst.com'):
-            raise forms.ValidationError("Only softcatslyst emails are accepted.")
+            raise forms.ValidationError("Only softcatalyst emails are accepted.")
         return email
