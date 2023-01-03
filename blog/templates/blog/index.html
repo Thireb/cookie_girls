@@ -37,7 +37,8 @@
           <h1></span> Delete Item?</h1>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-          
+          <form action="update" method="post" novalidate="" class="post-form">
+            {% csrf_token %}
             <div class="form-group">
               
             </div>
@@ -46,10 +47,14 @@
               Are you sure you want to delete this?
 
               </p>
+              <input type=hidden name = 'postDelete' value="{{post.pk}}"">
             </div>
             
-              <button type="submit" onClick="postDeleteCall()" class="btn btn-danger btn-block" item_id="{{post.pk}}" id='yes_button' data-dismiss="modal"><span class="glyphicon glyphicon-off"></span> Yes</button>
+              <button type="submit" onClick="postDeleteCall()" class="btn btn-danger btn-block" data_idpost="{{post.pk}}" id='yes_button' data-dismiss="modal"><span class="glyphicon glyphicon-off"></span> Yes</button>
+            </form>
+
         </div>
+
         <div class="modal-footer">
           <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
         </div>

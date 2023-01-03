@@ -17,14 +17,14 @@ urlpatterns = [
     path('form/',views.NewPostCreateView.as_view(),name='new-form'),
 
     #ajax url for update
-    path('update/',views.UpdatePostView.as_view(), name='update'),
+    path('update/<int:pk>/',views.UpdatePost.as_view(), name='update'),
     
     #feedback against a post
     path('post/<int:pk>/feedback',views.FeedbackOfPostView.as_view(), name='feedback_post'),
     #Feedback Success
     path('success/',views.SuccessView.as_view(),name='success'),
     #Delete View
-    path('delete',views.Deletepost.as_view(),name='delete'),
+    path('delete/<int:pk>/',views.Deletepost.as_view(),name='delete'),
     
     
 ]

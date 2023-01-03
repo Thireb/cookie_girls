@@ -98,13 +98,12 @@ class NewPostCreateView(CreateView):
         
         
         
-# class UpdatePost(UpdateView):
-#     #error: quote_from_bytes() expected bytes
-#     model = Post
-#     context_object_name ='post'
-#     fields = ['title','text',]
-#     def get_success_url(self):
-#         return JsonResponse({'Updated':True}, status = 200)
+class UpdatePost(UpdateView):
+    #error: quote_from_bytes() expected bytes
+    model = Post
+    context_object_name ='post'
+    fields = ['title','text',]
+    success_url = reverse_lazy('index')
 
 #To update a saved post, data is sent using Ajax
 class UpdatePostView(UpdateView):
@@ -167,13 +166,15 @@ class FeedbackOfPostView(CreateView):
 #         return JsonResponse({"Deleted":False}, status=400)
     
 class Deletepost(DeleteView):
+    model = Post
+    success_url = reverse_lazy('index')
     # def post(self,request):
     #     post = get_object_or_404(Post, pk = request.POST.get("post_to_delete"))
     #     post.delete()
     #     return JsonResponse({'Deleted':True}, status = 200)
     #For future use, currently only GET request is being used for post deletion
     
-    def get(self,request):
-        post = get_object_or_404(Post, pk = request.GET.get("post_to_delete"))
-        post.delete()
-        return JsonResponse({'Deleted':True}, status = 200)
+    # def get(self,request):
+    #     post = get_object_or_404(Post, pk = request.GET.get("post_to_delete"))
+    #     post.delete()
+    #     return JsonResponse({'Deleted':True}, status = 200)
