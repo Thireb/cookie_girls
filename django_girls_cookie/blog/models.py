@@ -16,11 +16,11 @@ class Post(models.Model):
     title = models.CharField('Title of post',max_length=125)
     text = models.TextField('Enter the text here')
     created_at = models.DateTimeField(default=timezone.now)
-    published_at = models.DateTimeField(null=True, blank=True)
+    published_at = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     
-    def publish(self):
-        self.published_at = timezone.now()
-        self.save()
+    # def publish(self):
+    #     self.published_at = timezone.now()
+    #     self.save()
     
     def __str__(self):
         return self.title

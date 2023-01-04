@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="{% static 'blog/css/styles.css' %}" />
-  <link rel="stylesheet" href="{% static 'blog/css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
 {% endblock style %}
     
@@ -16,11 +16,11 @@
     <article class="post">
         <aside class="actions">
             <a class="btn btn-secondary" id='edit' post_id="{{post.pk}}" >
-                <img class="" src='{% static "blog/icons/pencil-fill.svg" %}'>
+                <img class="" src='{% static "images/icons/pencil-fill.svg" %}'>
 
             </a>
             <a class="btn" href="{% url 'feedback_post' pk=post.pk %}">
-                <img class="" src='{% static "blog/icons/icon10.png" %}'>
+                <img class="" src='{% static "images/icons/icon10.png" %}'>
                 
             </a>
         </aside>
@@ -69,7 +69,7 @@
     
 {% block script %}
 
-<script src="{% static 'blog/javascript/main.js' %}"" >
+<script src="{% static 'js/main.js' %}"" >
 
 </script>
 {% endblock script %}

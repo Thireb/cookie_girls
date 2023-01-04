@@ -20,7 +20,7 @@ class FeedbackPostAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     '''Admin View for Post'''
 
-    list_display = ('name','title','created_at',)
+    list_display = ('name','title','created_at','published_at')
     list_filter = ('created_at','published_at','name',)
     search_fields = ('title','name',)
     ordering = ('created_at',)
