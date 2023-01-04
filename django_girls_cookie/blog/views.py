@@ -88,4 +88,5 @@ class FeedbackOfPostView(CreateView):
 class Deletepost(DeleteView):
     model = Post
     success_url = reverse_lazy('index')
-    
+    # def form_valid(self):
+    #     return None

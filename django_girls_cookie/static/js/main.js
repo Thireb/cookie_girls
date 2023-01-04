@@ -12,19 +12,17 @@ function postDelete(){
     //var post_to_delete = $(this).attr("item_id");
     console.log(post_to_delete)
     $.ajax({
-      url: "delete",
-      type: "GET",
-      data: {
-        post_to_delete: post_to_delete,
-      },
+      url: "delete/" + post_to_delete + "/",
+      type: "POST",
+      data: $(".post-form").serialize(),
       success: function (json) {
+        //alert('Post Deleted!')
         //post_to_delete = ''
-        console.log(json);
+        //console.log(json);
         console.log("success");
         var meriDiv = document.getElementById(post_to_delete);
-        console.log(post_to_delete.type)
+        //console.log(post_to_delete.type);
         meriDiv.parentNode.removeChild(meriDiv);
-        
       },
       error: function (xhr, errmsg, err) {
         $("#results").html(
@@ -51,7 +49,9 @@ $(document).on("click",'#edit', function(event){
 })
 
 function postUpdate(){
-    console.log(post_to_update);
+    //console.log(post_to_update);
+    console.log($("#yes_button").data("idpost"));
+
     var text_to_update = $('#id_text').val()
     console.log(text_to_update)
     var title_to_update = $("#id_title").val();
@@ -59,19 +59,14 @@ function postUpdate(){
 
     $.ajax({
       headers: { "X-CSRFToken": $("[name=csrfmiddlewaretoken]").val() },
-      url: "../../update",
+      url: "../../update/" + $("#yes_button").data("idpost") + "/",
       type: "POST",
-      data: {
-        post_to_update: post_to_update,
-        title:title_to_update,
-        text:text_to_update,
-      },
+      data: $(".post-form").serialize(),
       success: function (json) {
-        console.log(json);
+        //console.log(json);
         console.log("success");
-        $('.title_here').text(title_to_update)
-        $('.text_here').text(text_to_update)
-        
+        $(".title_here").text(title_to_update);
+        $(".text_here").text(text_to_update);
       },
       error: function (xhr, errmsg, err) {
         $("#results").html(
