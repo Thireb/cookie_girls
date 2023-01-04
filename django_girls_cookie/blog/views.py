@@ -85,8 +85,10 @@ class FeedbackOfPostView(CreateView):
         feed.save()
         return redirect(reverse_lazy('success'))
         
-class Deletepost(DeleteView):
+class deletePostView(DeleteView):
     model = Post
     success_url = reverse_lazy('index')
     # def form_valid(self):
     #     return None
+    # def get_success_url(self):
+    #     return JsonResponse({'Updated':True}, status_cc = 200)

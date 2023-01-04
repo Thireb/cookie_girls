@@ -24,7 +24,7 @@ urlpatterns = [
     #Feedback Success
     path('success/',views.SuccessView.as_view(),name='success'),
     #Delete View
-    path('delete/<int:pk>/',views.Deletepost.as_view(),name='delete'),
+    path('delete/<int:pk>/',views.deletePostView.as_view(),name='delete'),
     
     
 ]
