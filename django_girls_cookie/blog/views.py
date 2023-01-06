@@ -53,24 +53,6 @@ class UpdatePost(UpdateView):
     fields = ['title','text',]
     success_url = reverse_lazy('index')
 
-#To update a saved post, data is sent using Ajax, OLD VIEW
-# class UpdatePostView(UpdateView):
-#     model = Post
-#     def post(self, request):
-        
-#         try:
-#             post_id = request.POST.get('post_to_update')
-#             title = request.POST.get('title')
-#             text = request.POST.get('text')
-#             post = get_object_or_404(Post,pk = post_id)
-            
-#         except:
-#             return JsonResponse({'Updated':False}, status = 400)
-#         post.title = title
-#         post.text = text
-#         #post.publish()
-#         post.save()
-#         return JsonResponse({'Updated':True}, status = 200)
 
 class FeedbackOfPostView(CreateView):
     form_class = FeedbackPostForm
