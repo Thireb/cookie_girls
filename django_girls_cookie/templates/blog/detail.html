@@ -45,15 +45,17 @@
         <div class="modal-body" style="padding:50px 70px;">
 
           <!--Form starts here-->
+            
+
             <form novalidate="" class="post-form">
             {% csrf_token %}
             <p>
-            <label for="id_title">Title of post:</label>
+            <label for="id_title" class='title_label'>Title of post:</label>
             <input type="text" name="title" maxlength="125" required="" value="{{post.title}}" id="id_title"> 
             </p>
             <p>
-            <label for="id_text">Enter the text here:</label>
-            <textarea name="text" cols="40" rows="10" required="" id="id_text">{{post.text}}</textarea>
+            <label for="id_text" class='text_label'>Enter the text here:</label>
+            <textarea name="text" cols="40" rows="10" required="" id="id_text" >{{post.text}}</textarea>
             </p>
             <button type="button" class="btn btn-success btn-block" data-idpost="{{post.pk}}" id='yes_button' data-dismiss="modal"><span class="glyphicon glyphicon-on" ></span> Update</button>
             </form>

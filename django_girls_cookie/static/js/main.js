@@ -1,4 +1,4 @@
-var post_to_btn = ''; //because delete button is replicated and only that has the id.
+var post_to_btn = ""; //because delete button is replicated and only that has the id.
 // so to get every button's id on click, a global variable has to be there.
 $("#myBtn").on("click", function (event) {
   post_to_btn = $(this).attr("post_id");
@@ -46,7 +46,25 @@ $("#edit").on("click", function (event) {
 });
 $("#yes_button").on("click", function (event) {
   //event.preventDefault();
-  postUpdate();
+  var text_to_update = $("#id_text");
+  //console.log(text_to_update);
+  var title_to_update = $("#id_title");
+  //console.log(title_to_update);
+  // var error_message = $("#error_display").val();
+
+  //Check fields empty or not, if empty, disable the submit button.
+  if (text_to_update.val().length > 0 && title_to_update.val().length > 0) {
+    console.log('All Ok')
+  } else {
+    console.log("Empty field");
+    // $(".invalid-feedback").html("<strong>Fields cannot be empty.</strong>");
+    // $("#error_display").text("Fields cannot be empty");
+
+    $(".title_label").before("<p >Fields cannot be empty</p>");
+
+    $(this).prop("disabled", true);
+    //postUpdate();
+  }
   //$("#myModal").modal("toggle");
 });
 function postUpdate() {
@@ -61,7 +79,7 @@ function postUpdate() {
   var post = $("#yes_button").data("idpost");
   $.ajax({
     headers: { "X-CSRFToken": $("[name=csrfmiddlewaretoken]").val() },
-    url: "/update/" +post +"/",
+    url: "/update/" + post + "/",
     type: "POST",
     data: $(".post-form").serialize(),
     success: function (json) {
@@ -84,6 +102,7 @@ function postUpdate() {
     },
   });
 }
+
 // function postUpdateCall(){
 //     postUpdate()
 // }

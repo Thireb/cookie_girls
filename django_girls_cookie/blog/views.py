@@ -52,6 +52,7 @@ class UpdatePost(UpdateView):
     context_object_name ='post'
     fields = ['title','text',]
     success_url = reverse_lazy('index')
+    
 
 
 class FeedbackOfPostView(CreateView):
