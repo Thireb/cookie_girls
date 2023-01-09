@@ -33,7 +33,7 @@
         <p class='text_here'>{{ post.text|linebreaksbr }}</p>
     </article>
 
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="myModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -49,6 +49,7 @@
 
             <form novalidate="" class="post-form">
             {% csrf_token %}
+            <p class='error-msg' style="color:Tomato;"></p>
             <p>
             <label for="id_title" class='title_label'>Title of post:</label>
             <input type="text" name="title" maxlength="125" required="" value="{{post.title}}" id="id_title"> 
@@ -57,7 +58,7 @@
             <label for="id_text" class='text_label'>Enter the text here:</label>
             <textarea name="text" cols="40" rows="10" required="" id="id_text" >{{post.text}}</textarea>
             </p>
-            <button type="button" class="btn btn-success btn-block" data-idpost="{{post.pk}}" id='yes_button' data-dismiss="modal"><span class="glyphicon glyphicon-on" ></span> Update</button>
+            <button type="button" class="btn btn-success btn-block" data-idpost="{{post.pk}}" id='yes_button' ><span class="glyphicon glyphicon-on" ></span> Update</button>
             </form>
         </div>
         <div class="modal-footer">
