@@ -78,6 +78,7 @@ venv/
 ENV/
 .env
 env/
+winven/
 # Rope project settings
 .ropeproject
 
