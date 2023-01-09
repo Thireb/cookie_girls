@@ -16,24 +16,57 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name="Post",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=125, verbose_name='Title of post')),
-                ('text', models.TextField(verbose_name='Enter the text here')),
-                ('created_at', models.DateTimeField(default=django.utils.timezone.now)),
-                ('published_at', models.DateTimeField(blank=True, null=True)),
-                ('name', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(max_length=125, verbose_name="Title of post"),
+                ),
+                ("text", models.TextField(verbose_name="Enter the text here")),
+                ("created_at", models.DateTimeField(default=django.utils.timezone.now)),
+                ("published_at", models.DateTimeField(blank=True, null=True)),
+                (
+                    "name",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='FeedbackPost',
+            name="FeedbackPost",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150)),
-                ('email', models.EmailField(max_length=254, verbose_name='Enter your email.')),
-                ('feedback', models.TextField(verbose_name='Write your feedback.')),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='blog.post')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=150)),
+                (
+                    "email",
+                    models.EmailField(max_length=254, verbose_name="Enter your email."),
+                ),
+                ("feedback", models.TextField(verbose_name="Write your feedback.")),
+                (
+                    "post",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="blog.post"
+                    ),
+                ),
             ],
         ),
     ]

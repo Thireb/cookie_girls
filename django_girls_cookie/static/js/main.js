@@ -1,5 +1,8 @@
-var post_to_btn = ""; /*because delete button is replicated and only that has the id. 
-So to get every button's id on click, a global variable has to be there.*/
+/*because delete button is created using loop and only that has the id. 
+So to get every button's id on click, a global variable has to be there.
+so that when a button is clicked, it's id is taken at that time.*/
+
+var post_to_btn = "";
 
 $("#myBtn").on("click", function (event) {
   post_to_btn = $(this).attr("post_id");
@@ -24,17 +27,16 @@ function postDelete() {
       console.log(xhr);
       console.log(errmsg);
       console.log(err);
-    
     },
   });
 }
-function open_modal(){
+
+//for update, because it wan't properly closing and opening.
+function open_modal() {
   $("#myModal").modal("show");
-
 }
-function hide_modal(){
+function hide_modal() {
   $("#myModal").modal("hide");
-
 }
 $("#edit").on("click", function (event) {
   open_modal();
@@ -43,23 +45,21 @@ $("#yes_button").on("click", function (event) {
   var text_to_update = $("#id_text");
   var title_to_update = $("#id_title");
   //Check fields empty or not, if empty, disable the submit button.
- 
+
   if (text_to_update.val().length > 0 && title_to_update.val().length > 0) {
-    console.log('All Ok')
+    console.log("All Ok");
     postUpdate(text_to_update.val(), title_to_update.val());
     $(".error-msg").text("");
 
-    hide_modal();    
+    hide_modal();
   } else {
     //Prevent the modal from closing
-      console.log("Empty field");
-    
-      // $("#myModal").on("hide.bs.modal", function (e) {
-      //   e.preventDefault();
-      // });
-      $(".error-msg").text("Fields cannot be empty");
+    console.log("Empty field");
 
-    
+    // $("#myModal").on("hide.bs.modal", function (e) {
+    //   e.preventDefault();
+    // });
+    $(".error-msg").text("Fields cannot be empty");
   }
 });
 function postUpdate(text_to_update, title_to_update) {
@@ -74,15 +74,12 @@ function postUpdate(text_to_update, title_to_update) {
       console.log("success");
       $(".title_here").text(title_to_update);
       $(".text_here").text(text_to_update);
-
     },
     error: function (xhr, errmsg, err) {
-
       //Display the error, critical ones, in console
       console.log(xhr);
       console.log(errmsg);
       console.log(err);
-
     },
   });
 }
